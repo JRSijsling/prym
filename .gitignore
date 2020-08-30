@@ -1,0 +1,7 @@
+# Secondary files
+**/*.swp
+**/*~
+**/*.sig
+
+# Directory
+NothingToSeeHere/*
