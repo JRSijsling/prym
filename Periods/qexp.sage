@@ -81,6 +81,8 @@ def NewtonGamma0_0(f,G,hiqprec,p): # f cuspform / Z of level G, compute eqn betw
     nptes=len(G.cusps())
     degU=indG
     degV=2*g0-2+indG+nptes
+    if (degU+1)*(degV+1)>hiqprec:
+        return f.qexp(hiqprec+1)
     #print("E4 E6")
     E4=1+240*Fpt([sigma(n,3) for n in range(1,hiqprec)]).shift(1).add_bigoh(hiqprec+1)
     E6=1-504*Fpt([sigma(n,5) for n in range(1,hiqprec)]).shift(1).add_bigoh(hiqprec+1)
@@ -88,7 +90,10 @@ def NewtonGamma0_0(f,G,hiqprec,p): # f cuspform / Z of level G, compute eqn betw
     J=1/U
     dJshift=J.derivative().shift(1)
     #print("qexp")
+    print("degU=",degU)
+    print("degV=",degV)
     fp=SerRedModp(f.qexp((degU+1)*(degV+1)),Fp,Fpt)
+    print("fp=",fp)
     V=(fp/dJshift).power_series()
     #print("eq")
     eq=PlanEq(U,V,degU,degV,Fp,u,v)
@@ -119,6 +124,8 @@ def NewtonGamma0_1(f,f0,G,hiqprec,p): # same as above, but uses f0 (a cuspform /
     g0=G.genus()
     degU=indG
     degV=2*g0-2
+    if (degU+1)*(degV+1)>hiqprec:
+        return f.qexp(hiqprec+1)
     #print("E4 E6")
     E4=1+240*Fpt([sigma(n,3) for n in range(1,hiqprec)]).shift(1).add_bigoh(hiqprec+1)
     E6=1-504*Fpt([sigma(n,5) for n in range(1,hiqprec)]).shift(1).add_bigoh(hiqprec+1)
@@ -155,6 +162,8 @@ def NewtonGamma0_2(f,f0,f1,G,hiqprec,p): # same as above, but uses f1/f0 instead
     g0=G.genus()
     degU=2*g0-2
     degV=2*g0-2
+    if (degU+1)*(degV+1)>hiqprec:
+        return f.qexp(hiqprec+1)
     #print("Red mod p")
     f0p=SerRedModp(f0,Fp,Fpt)
     f1p=SerRedModp(f1,Fp,Fpt)
@@ -248,6 +257,8 @@ def NewtonGamma1_2(f,f0,f1,r,G,G0,hiqprec,p): # f of level G and nebentypus kill
     zeta=K.gen()
     degU=2*G0.genus()-2
     degV=2*G.genus()-2
+    if (degU+1)*(degV+1)>hiqprec:
+        return f.qexp(hiqprec+1)
     #print("Red mod P")
     f0p=SerRedModp(f0,Fp,Fpt)
     f1p=SerRedModp(f1,Fp,Fpt)
