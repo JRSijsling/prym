@@ -90,10 +90,7 @@ def NewtonGamma0_0(f,G,hiqprec,p): # f cuspform / Z of level G, compute eqn betw
     J=1/U
     dJshift=J.derivative().shift(1)
     #print("qexp")
-    print("degU=",degU)
-    print("degV=",degV)
     fp=SerRedModp(f.qexp((degU+1)*(degV+1)),Fp,Fpt)
-    print("fp=",fp)
     V=(fp/dJshift).power_series()
     #print("eq")
     eq=PlanEq(U,V,degU,degV,Fp,u,v)

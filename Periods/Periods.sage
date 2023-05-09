@@ -154,7 +154,7 @@ def GammaHPeriods(N,H,prec):
                 continue # Level M0, trivial character has already been done
             if r > 2:
                 # eps != epsbar, remove epsbar space from todo list
-                for i in range(1,len(Stodo)):
+                for i in range(len(Stodo)):
                     if Stodo[i].character() == eps.bar():
                         Stodo.pop(i)
                         break
