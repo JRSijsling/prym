@@ -154,7 +154,7 @@ def GammaHPeriods(N,H,prec):
                 continue # Level M0, trivial character has already been done
             if r > 2:
                 # eps != epsbar, remove epsbar space from todo list
-                for i in range(1,len(Stodo)):
+                for i in range(len(Stodo)):
                     if Stodo[i].character() == eps.bar():
                         Stodo.pop(i)
                         break
@@ -164,13 +164,13 @@ def GammaHPeriods(N,H,prec):
             d = S.dimension()
             S = S.basis()
             Sepshi = []
-            GH = GammaH(MM0,[x for x in range(MM0) if x%M in eps.kernel()]) # forms in S are also modular of that level
+            GH = GammaH(MM0,[x for x in range(MM0) if gcd(x,MM0)==1 and x%M in eps.kernel()]) # forms in S are also modular of that level
             for j in range(d):
                 f = S[j]
                 fden = lcm([a.denominator() for a in f.qexp(GH.sturm_bound()+1).coefficients()]) # denom de f
                 B = ceil(C*hinewbound*fden*sum([abs(Q[i,j]) for i in range(d)])) # Borne sur les coeffs de fden*f
                 p = next_prime(2*B+2)
-                while not (p%ExpH)==1:
+                while ExpH>1 and not (p%ExpH)==1:
                     p = next_prime(p+1)
                 Sepshi.append(NewtonGamma1_2(fden*f,f0,f1,r,GH,G0,hiqprec,p)/fden)
             Shi.append((Sepshi,P,eps))
